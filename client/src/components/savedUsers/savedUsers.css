@@ -1,0 +1,50 @@
+.heading{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.left{
+    display: flex;
+    flex-direction: row;
+
+}
+
+.tableHeadingof{
+ background-color: #BBE3BE;
+ display: flex;
+
+}
+.tableData{
+    display: flex;
+    text-align: center;
+    margin-top: 10px;
+}
+
+.item{
+    border: solid #000 2px;
+}
+
+.offwhite{
+    background-color: #ffffff;
+    margin-top: 10px;
+}
+.nameof{
+    flex: .2;
+}
+.genderof{
+    flex: .1;
+}
+.Idof{
+    flex: .1;
+}
+.addressof{
+    flex: .3;
+}
+.guardianof{
+    flex: .2;
+}
+.nationalityof{
+    flex: .1;
+}
+
