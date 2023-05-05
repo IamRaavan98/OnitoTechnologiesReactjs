@@ -49,7 +49,7 @@ import { Link, useNavigate } from "react-router-dom";
   //api call
   const submitDataAndReceive = async (data) => {
     try {
-      const dataget = await axios.post(`http://localhost:4000/api/register`, {
+      const dataget = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/api/register`, {
         ...data,
       });
       if(dataget?.data?.success === true){
