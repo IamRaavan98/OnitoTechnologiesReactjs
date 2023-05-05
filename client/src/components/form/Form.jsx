@@ -8,11 +8,13 @@ import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
  export default function Form() {
   const SignupSchema =  yup.object().shape({
-    name: yup.string().required(),
-    gender: yup.string().required(),
-    Age: yup.date().required(),
-    website: yup.string().url(),
-    mobile: yup.number().min(10).max(10),
+    // name: yup.string().required(),
+    // gender: yup.string().required(),
+    // Age: yup.date().required(),
+    // website: yup.string().url(),
+    mobile: yup.number().test('is-valid-mobile', 'Mobile number is not valid', value => {
+      return /^\d{10}$/.test(value)
+    }),
     ID: yup
     .string()
     .required("This field is required")
@@ -48,19 +50,19 @@ import { Link, useNavigate } from "react-router-dom";
 
   //api call
   const submitDataAndReceive = async (data) => {
-    try {
-      const dataget = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/api/register`, {
-        ...data,
-      });
-      if(dataget?.data?.success === true){
-        navigate("/allUsersData");
-      }
-      else{
-        console.log(dataget);
-      }
-    } catch (error) {
-      console.log(error?.message);
-    }
+    // try {
+    //   const dataget = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/api/register`, {
+    //     ...data,
+    //   });
+    //   if(dataget?.data?.success === true){
+    //     navigate("/allUsersData");
+    //   }
+    //   else{
+    //     console.log(dataget);
+    //   }
+    // } catch (error) {
+    //   console.log(error?.message);
+    // }
   };
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
