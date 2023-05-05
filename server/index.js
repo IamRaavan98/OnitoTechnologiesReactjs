@@ -5,8 +5,7 @@ const mongoose = require("mongoose")
 const DBconnection = require("./config/DB");
 const cors = require("cors");
 const userRoutes = require("./routes/user");
-
-
+const path = require('path');
 // middleware
 app.use(express.json())
 
@@ -15,15 +14,23 @@ app.use(express.json())
 DBconnection();
 
 // cors
-app.use(cors({
-    origin:process.env.REACT_APP_FRONTEND_URL,
-    credentials: true,
-}));
-
+// app.use(cors({
+//     origin:process.env.REACT_APP_FRONTEND_URL,
+//     credentials: true,
+// }));
 
 // Routes
+app.use(express.static(path.join(__dirname, 'public')));
 app.use("/api",userRoutes)
 
+  // Serve the React app for all other requests
+  app.get('/*', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'index.html'));
+  });
+  
+
+
+app.use(express.urlencoded({ extended: true }));
 
 
 //server listen@

@@ -26,7 +26,7 @@ function handleAge(birthdate) {
 
 const handleData = async()=>{
    try {
-     const res = await axios.get(`http://localhost:4000/api/getAllData/`)
+     const res = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/getAllData/`)
      
      if(res?.data?.success === true){
       setUsersInfo(res?.data?.data.reverse())
