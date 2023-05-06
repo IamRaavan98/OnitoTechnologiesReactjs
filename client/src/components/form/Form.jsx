@@ -12,7 +12,9 @@ import { Link, useNavigate } from "react-router-dom";
     gender: yup.string().required(),
     Age: yup.date().required(),
     website: yup.string().url(),
-    mobile: yup.number().min(10).max(10),
+    mobile: yup.number().test('is-valid-mobile', 'Mobile number is not valid', value => {
+      return /^\d{10}$/.test(value)
+    }),
     ID: yup
     .string()
     .required("This field is required")
@@ -43,6 +45,10 @@ import { Link, useNavigate } from "react-router-dom";
     resolver: yupResolver(SignupSchema),
   });
   const onSubmit = (data) => {
+    let temp = data.GovtId;
+    data.guardian = data.guardian+ "->" + data.guardian_name
+    data.ID = data.ID+temp;
+
     submitDataAndReceive(data);
   };
 
@@ -129,7 +135,7 @@ import { Link, useNavigate } from "react-router-dom";
 
             <input placeholder="Enter Govt ID" {...register("GovtId")} />
             {errors.GovtId && <p>{errors.GovtId.message}</p>}
-            {console.log(errors)}
+           
           </label>
         </div>
       </div>
@@ -139,16 +145,16 @@ import { Link, useNavigate } from "react-router-dom";
         <div className="detail">
           <label className="distance">
             Guardian Details
-            <select {...register("Label")} style={{ width: "100px" }}>
+            <select {...register("guardian")} style={{ width: "100px" }}>
               <option value="">Enter label</option>
               <option value="parents">Parents</option>
               <option value="orphan">Adopted</option>
             </select>
             <input
               placeholder="Enter Guardian Name"
-              {...register("label")}
+              {...register("guardian_name")}
             />
-            {errors.label && <p className="error">{errors.label.message}</p>}
+            {errors.guardian_name && <p className="error">{errors.guardian_name.message}</p>}
           </label>
           <label className="distance">
             Email
