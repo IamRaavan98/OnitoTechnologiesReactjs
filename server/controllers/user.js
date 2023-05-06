@@ -4,6 +4,7 @@ const FormData = require("../models/FormData");
 
 exports.register = async(req,res)  =>{
          const data = req.body;
+         console.log(data);
          let allUsersData;
     try {
         const response = await FormData.create(data)

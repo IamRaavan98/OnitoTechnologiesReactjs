@@ -31,7 +31,6 @@ const handleData = async()=>{
      if(res?.data?.success === true){
       setUsersInfo(res?.data?.data.reverse())
      }
-     console.log(res);
    } catch (error) {
      console.log(error?.message);
    }
